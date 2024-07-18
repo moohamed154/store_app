@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:store/models/product_model.dart';
+import 'package:store/services/get_all_product_service.dart';
+import 'package:store/widgets/custom_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,55 +28,33 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: Container(
-          height: 130,
-          width: 220,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                blurRadius: 40,
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 0,
-                offset: Offset(10, 10)),
-          ]),
-          child: Card(
-            elevation: 10,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Handbag LV',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                    ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 65,
+        ),
+        child: FutureBuilder<List<ProductModel>>(
+          future: AllProductsService().getAllProducts(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<ProductModel> products = snapshot.data!;
+              return GridView.builder(
+                itemCount: products.length,
+                  clipBehavior: Clip.none,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.5,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 100,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        r'$225',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
+                  itemBuilder: (context, index) {
+                    return CustomCard(product: products[index],);
+                  });
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
     );

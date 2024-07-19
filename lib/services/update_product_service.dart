@@ -1,3 +1,4 @@
+import 'package:http/http.dart' as http;
 import 'package:store/helper/api.dart';
 import 'package:store/models/product_model.dart';
 
@@ -11,7 +12,7 @@ class UpdateProductService {
     required String category,
   }) async {
     print('product id = $id');
-    // ignore: missing_required_param
+    
     Map<String, dynamic> data = await Api().put(
       url: 'https://fakestoreapi.com/products/$id',
       body: {

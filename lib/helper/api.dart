@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  Future<dynamic> get({required String url, @required String? token }) async {
-
-     Map<String, String> headers = {};
+  Future<dynamic> get({required String url, @required String? token}) async {
+    Map<String, String> headers = {};
 
     if (token != null) {
       headers.addAll({
@@ -30,9 +29,7 @@ class Api {
     Map<String, String> headers = {};
 
     if (token != null) {
-      headers.addAll({
-        'Authorization': 'Bearer $token',
-      });
+      headers.addAll({'Authorization': 'Bearer $token'});
     }
     http.Response response = await http.post(
       Uri.parse(url),
@@ -52,12 +49,9 @@ class Api {
       {required String url,
       @required dynamic body,
       @required String? token}) async {
-    Map<String, String> headers = {};
-
-    headers.addAll({
-      'Content-Type': 'application/x-www-form-urlencoded',
-    });
-
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+    };
 
     if (token != null) {
       headers.addAll({
@@ -66,19 +60,20 @@ class Api {
     }
 
     print('url = $url body = $body token = $token');
-    http.Response response = await http.post(
+    http.Response response = await http.put(
       Uri.parse(url),
-      body: body,
+      body: jsonEncode(body), // Ensure the body is JSON encoded
       headers: headers,
     );
     if (response.statusCode == 200) {
-
       Map<String, dynamic> data = jsonDecode(response.body);
       print(data);
       return (data);
     } else {
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
       throw Exception(
-          'there is a problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}');
+          'there is a problem with status code ${response.statusCode} with body ${response.body}');
     }
   }
 }

@@ -6,7 +6,6 @@ void main() {
   runApp(const StoreApp());
 }
 
-
 class StoreApp extends StatelessWidget {
   const StoreApp({super.key});
 
@@ -15,8 +14,8 @@ class StoreApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        HomePage.id : (context)=>  HomePage(), 
-         UpdateProductPage.id : (context)=>  UpdateProductPage(), 
+        HomePage.id: (context) => HomePage(),
+        UpdateProductPage.id: (context) => UpdateProductPage(),
       },
       initialRoute: HomePage.id,
     );

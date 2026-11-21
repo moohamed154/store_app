@@ -1,16 +1,32 @@
-# store
+# Store App
 
-A new Flutter project.
+An e-commerce store app that consumes a live products REST API.
+
+Browse a product catalog, view product details with ratings and prices, and
+add new products through the API - a compact exercise in clean API
+integration and state handling.
+
+## Features
+
+- Product catalog from a REST API
+- Product details (price, rating, description)
+- Add-product flow with API POST
+
+## Tech Stack
+
+Flutter - Dart - REST API (http package) - JSON serialization
+
+## Screenshots
+
+<!-- Add 2-3 screenshots here, e.g.:
+| Catalog | Details | Add product |
+|---|---|---|
+| ![](screenshots/catalog.png) | ![](screenshots/details.png) | ![](screenshots/add.png) |
+-->
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter pub get
+flutter run
+```

@@ -1,0 +1,12 @@
+# Show this repo as Dart: exclude native build scaffolding from language stats
+windows/** linguist-vendored
+linux/** linguist-vendored
+macos/** linguist-vendored
+ios/** linguist-vendored
+android/** linguist-vendored
+*.cmake linguist-vendored
+*.cc linguist-vendored
+*.cpp linguist-vendored
+*.cxx linguist-vendored
+*.h linguist-vendored
+*.hpp linguist-vendored
